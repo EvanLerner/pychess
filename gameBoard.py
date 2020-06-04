@@ -20,12 +20,12 @@ class Board():
         self.board[6].append(Knight(6, 0, "black"))
         self.board[7].append(Rook(7, 0, "black"))
         for i in range(8):
-            self.board[i].append(Pawn(0,0,"black"))
+            self.board[i].append(Pawn(i, 1, "black"))
         for i in range(4):
             for j in range(8):
-                self.board[j].append(NoPiece(i+2,j))
+                self.board[j].append(NoPiece(i + 2, j))
         for i in range(8):
-            self.board[i].append(Pawn(0,0,"white"))
+            self.board[i].append(Pawn(i, 6, "white"))
         self.board[0].append(Rook(0, 7, "white"))
         self.board[1].append(Knight(1, 7, "white"))
         self.board[2].append(Bishop(2, 7, "white"))
@@ -35,15 +35,8 @@ class Board():
         self.board[6].append(Knight(6, 7, "white"))
         self.board[7].append(Rook(7, 7, "white"))
 
-
     def getBoard(self):
         return self.board
-
-    def printBoard(self):
-        for i in range(8):
-            for j in range(8):
-                print(self.board[i][j].getName(), end=(' '))
-            print()
 
     def getPiece(self, x, y):
         return self.board[x][y]
@@ -59,11 +52,14 @@ class Board():
     def whiteKingInCheck(self):
         kingx = -1
         kingy = -1
+        breakloop = False
         for i in range(8):
+            if breakloop: break
             for j in range(8):
                 if self.getPiece(i, j).getName() == "king" and self.getPiece(i, j).getColor() == "white":
                     kingx = i
                     kingy = j
+                    breakloop = True
 
         for i in range(8):
             for j in range(8):
@@ -111,7 +107,14 @@ class Board():
         return False
 
     def printBoard(self):
+        for i in range(9):
+            if i == 0:
+                print("     ", end="")
+            else:
+                print(" ", i - 1, "  ", end="")
+        print()
         for i in range(8):
+            print(i, "  ", end="")
             for j in range(8):
                 printBoardHelper(self.board[j][i].getName(), self.board[j][i].getColor(), i, j)
             print()

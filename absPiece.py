@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from copy import copy, deepcopy
 
-import gameBoard
+
 from pieces.nopiece import NoPiece
 
 
