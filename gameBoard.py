@@ -8,6 +8,7 @@ from pieces.queen import Queen
 from pieces.rook import Rook
 
 
+
 class Board():
     def __init__(self):
         self.board = [[], [], [], [], [], [], [], []]
@@ -42,8 +43,10 @@ class Board():
         return self.board[x][y]
 
     def setPiece(self, piece, x, y):
+        xcord,ycord = piece.getCords()
         self.board[x][y] = piece
         piece.setCords(x, y)
+        self.board[xcord][ycord] = NoPiece(xcord,ycord)
 
     def movePiece(self, piece, x, y):
         piece.setFirstMoveFalse()

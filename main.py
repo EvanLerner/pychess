@@ -53,7 +53,7 @@ def turn(whiteTurn, board):
 
 def main():
 
-    ui.makeWindow(Board())
+    ui.makeWindow()
 
 
 
